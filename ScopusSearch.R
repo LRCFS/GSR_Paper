@@ -5,12 +5,10 @@
 # The columns will need to contain:
 #   Year; Title; Source.title; Authors; AuthorID; Author.Keywords; Index.Keywords; EID
 
-library(plyr)
 library(dplyr)
 library(stringr)
 library(tidyr)
 library(ggplot2)
-library(reshape2)
 
 #############################################################
 #####                      Function                     #####

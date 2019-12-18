@@ -1,10 +1,5 @@
 
 library(tidyverse)
-library(purrr)
-library(dplyr)
-library(readr)
-library(tidyr)
-library(ggplot2)
 
 ####### Global Vars ############
 cit.path = 'Citation/PaperCitation/'
