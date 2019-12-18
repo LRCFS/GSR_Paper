@@ -1,6 +1,3 @@
-# clear list
-rm(list=ls())
-
 #############################################################
 #####                 File requirement                  #####
 #############################################################
@@ -14,7 +11,6 @@ library(stringr)
 library(tidyr)
 library(ggplot2)
 library(reshape2)
-library(Cairo)
 
 #############################################################
 #####                      Function                     #####
@@ -182,7 +178,7 @@ p <- ggplot(GraphTemp1,aes(x=Year,y=reorder(KeywordsCorrected,graphorder),fill=c
         plot.margin=margin(0.7,0.4,0.1,0.2,"cm"),
         plot.title=element_text(colour=textcol,hjust=0,size=12))
 
-show(p)
+ggsave("KeywordTrend.png", p, width = 6, height = 8, units = "in", dpi=150)
 
 #############################################################
 #####                     Authors                       #####
