@@ -1,5 +1,3 @@
-              # clear list
-rm(list=ls())
 
 library(tidyverse)
 library(purrr)
@@ -122,5 +120,5 @@ dotplot_1 = ggplot(ReduceTopCitationSujectArea, aes(x=SubjectArea, y=Percentage)
   #stat_summary(fun.y=median, fun.ymin=median, fun.ymax=median, geom="crossbar", width=0.0) +
   theme(axis.text.x = element_text(angle=0, vjust=0.6))
   
-show(dotplot_1)
+ggsave("SubjectBoxplot.png",dotplot_1, width = 9, height = 6, units = "in", dpi=150)
 
