@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/228665895.svg)](https://zenodo.org/badge/latestdoi/228665895)
+
 A scientometric approach using gunshot residue (GSR) literature as an example
 =============================================================================
 
