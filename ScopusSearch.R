@@ -10,6 +10,8 @@ library(stringr)
 library(tidyr)
 library(ggplot2)
 library(maps)
+library(countrycode)
+library(RColorBrewer)
 
 #############################################################
 #####                      Function                     #####
@@ -67,45 +69,57 @@ names(ScopusOriginalData)[1:2] <- c("Authors", "AuthorID")
 data(world.cities)
 
 # replace "United States" with USA & "United Kingdom" with UK.
-aff.lst = gsub("United States$", "USA", ScopusOriginalData$Affiliations, perl = TRUE)
-aff.lst = gsub("United Kingdom$", "UK", aff.lst, perl = TRUE)
+aff.lst <- gsub("United States$", "USA", ScopusOriginalData$Affiliations, perl = TRUE)
+aff.lst <- gsub("United Kingdom$", "UK", aff.lst, perl = TRUE)
 # replace ';' with ',' as multiple affiliations are separated with ';'
 # but that doesn't fit with the strsplit()
-aff.lst = gsub(";", ",", aff.lst)
+aff.lst <- gsub(";", ",", aff.lst)
 # split fields by ", "
-splt.lst = sapply(aff.lst, strsplit, split = ", ", USE.NAMES = FALSE)
+splt.lst <- sapply(aff.lst, strsplit, split = ", ", USE.NAMES = FALSE)
 # extract fields which match a known city making sure that diacritics aren't a problem...
-city.lst = lapply(splt.lst, function(x)x[which(removeDiacritics(x) %in% world.cities$name)])
+city.lst <- lapply(splt.lst, function(x)x[which(removeDiacritics(x) %in% world.cities$name)])
 # ... or country
-cntry.lst = lapply(splt.lst, function(x)x[which(removeDiacritics(x) %in% world.cities$country.etc)])
+cntry.lst <- lapply(splt.lst, function(x)x[which(removeDiacritics(x) %in% world.cities$country.etc)])
 # this version only returns unique instances of countries per publication
-#cntry.lst = lapply(splt.lst, function(x)unique(x[which(x %in% world.cities$country.etc)]))
+#cntry.lst <- lapply(splt.lst, function(x)unique(x[which(x %in% world.cities$country.etc)]))
 
 ## generate plot of papers per country
-threshold = 4
-cntry.dat = data.frame(Country = unlist(cntry.lst), stringsAsFactors = FALSE)
+threshold <- 4
+cntry.dat <- data.frame(Country = removeDiacritics(unlist(cntry.lst)), stringsAsFactors = FALSE)
+
+# define continent for each country
+cntry.dat$Continent <- countrycode(sourcevar = cntry.dat[, "Country"],
+                            origin = "country.name",
+                            destination = "continent")
+
 # get countries under threshold
-other.dat = cntry.dat %>% 
-  group_by(Country) %>% 
+other.dat <- cntry.dat %>% 
+  group_by(Country, Continent) %>% 
   summarise(Count = n()) %>% 
   filter(Count <= threshold)
 # aggregate counts as 'Others'
-other.dat = data.frame(Country = "Others", Count = sum(other.dat$Count))
+other.dat <- data.frame(Country = "Others", Continent = "Other", Count = sum(other.dat$Count))
 
 # Collate counts for countries over threshold
-cntry.dat = cntry.dat %>% 
-  group_by(Country) %>% 
+cntry.dat <- cntry.dat %>% 
+  group_by(Country, Continent) %>% 
   summarise(Count = n()) %>% 
   filter(Count > threshold)
 # order by count
-cntry.dat$Country = reorder(cntry.dat$Country, +cntry.dat$Count)
+cntry.dat$Country <- reorder(cntry.dat$Country, +cntry.dat$Count)
 # add in 'Others'
-cntry.dat = rbind(other.dat, cntry.dat)
+cntry.dat <- rbind(other.dat, data.frame(cntry.dat))
 # plot
-ggplot(cntry.dat, aes(x=Country, y=Count)) + 
+p <- ggplot(cntry.dat, aes(x=Country, y=Count, fill=Continent)) + 
   geom_col() +
-  xlab('Country') +
-  coord_flip()
+  scale_fill_manual(values = brewer.pal(5, "Set1"), breaks = c("Americas", "Asia", "Europe", "Oceania", "Other")) +
+  #scale_fill_brewer(palette = 'Set1') +
+  xlab('Author Country Affiliation') +
+  ylab('Paper Count') +
+  coord_flip() +
+  theme_minimal()
+
+ggsave("CountryCounts.png", p, width = 8, height = 6, units = "in", dpi=150)
 
 
 # Select column label $Year, $Title,  $Source.title, $Author.Keywords, $Index.Keyword
