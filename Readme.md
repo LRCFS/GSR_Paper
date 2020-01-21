@@ -17,6 +17,9 @@ libraries:
 
     tidyverse
     ggplot2
+    maps
+    countrycodes
+    RColorBrewer
 
 Quickstart
 ----------
@@ -25,7 +28,7 @@ To generate the keyword trending plot and Gephi input files run:
 
     Rscript ScopusSearch.R
 
-This creates a `KeywordTrend.png` plot and `GephiAuthor.csv` 
+This creates the `CountryCounts.png`, `KeywordTrend.png` plots and the `GephiAuthor.csv`, 
 `GephiListAuthorLastYear.csv` files.
     
 To generate the subject area boxplot run:
