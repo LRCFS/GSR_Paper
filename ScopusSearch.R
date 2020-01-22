@@ -79,9 +79,9 @@ splt.lst <- sapply(aff.lst, strsplit, split = ", ", USE.NAMES = FALSE)
 # extract fields which match a known city making sure that diacritics aren't a problem...
 city.lst <- lapply(splt.lst, function(x)x[which(removeDiacritics(x) %in% world.cities$name)])
 # ... or country
-cntry.lst <- lapply(splt.lst, function(x)x[which(removeDiacritics(x) %in% world.cities$country.etc)])
+#cntry.lst <- lapply(splt.lst, function(x)x[which(removeDiacritics(x) %in% world.cities$country.etc)])
 # this version only returns unique instances of countries per publication
-#cntry.lst <- lapply(splt.lst, function(x)unique(x[which(x %in% world.cities$country.etc)]))
+cntry.lst <- lapply(splt.lst, function(x)unique(x[which(x %in% world.cities$country.etc)]))
 
 ## generate plot of papers per country
 threshold <- 4
@@ -112,10 +112,9 @@ cntry.dat <- rbind(other.dat, data.frame(cntry.dat))
 # plot
 p <- ggplot(cntry.dat, aes(x=Country, y=Count, fill=Continent)) + 
   geom_col() +
-  scale_fill_manual(values = brewer.pal(5, "Set1"), breaks = c("Americas", "Asia", "Europe", "Oceania", "Other")) +
-  #scale_fill_brewer(palette = 'Set1') +
-  xlab('Author Country Affiliation') +
-  ylab('Paper Count') +
+  scale_fill_manual(values = c("gray", brewer.pal(4, "Set1")), breaks = c("Americas", "Asia", "Europe", "Oceania", "Other")) +
+  xlab('Paper Country Affiliation') +
+  ylab('Total Papers') +
   coord_flip() +
   theme_minimal()
 
