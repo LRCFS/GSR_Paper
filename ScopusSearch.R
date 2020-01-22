@@ -325,3 +325,18 @@ write.table(GephiAuthor, file = "GephiAuthor.csv", quote = F, sep = "\t", row.na
 #Export to Gephi plot - Authors;Year
 write.table(AuthorMultipleOutputLastYear, file = "GephiListAuthorLastYear.csv", quote = F, sep = "\t", row.names = F)
 
+#####__________________Table 1 Output____________________#####
+
+# List of new "Authors" and their first "Year" of appearance
+AuthorFirstAppearance<- aggregate(AuthorListExtended$Year, list(AuthorListExtended$AuthorsCor), min)
+names(AuthorFirstAppearance) <- c("Author","Year")
+
+YearNewAuthor <- aggregate(AuthorFirstAppearance$Author,list(AuthorFirstAppearance$Year), FUN=length)
+names(YearNewAuthor) <- c("Year","New Authors")
+YearOutput <- Reduce(merge, list(NumberAuthorYear,PublicationYear,YearNewAuthor))
+YearTableOutput <- merge(YearOutput, YearNewAuthorSinglePaper, by="Year", all = T)
+YearTableOutput$Ratio <- round(YearOutput$Author/YearOutput$Publications, 1)
+YearTableOutput$`New Author Percentage` <- round(YearOutput$`New Authors`/YearOutput$Author*100, 1)
+
+#Export to text file for Latex import
+write.table(YearTableOutput, file = "YearTableOutput.txt", sep = " & ", row.names = F)
