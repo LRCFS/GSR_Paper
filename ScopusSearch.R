@@ -113,10 +113,11 @@ cntry.dat <- rbind(other.dat, data.frame(cntry.dat))
 p <- ggplot(cntry.dat, aes(x=Country, y=Count, fill=Continent)) + 
   geom_col() +
   scale_fill_manual(values = c("gray", brewer.pal(4, "Set1")), breaks = c("Americas", "Asia", "Europe", "Oceania", "Other")) +
-  xlab('Paper Country Affiliation') +
+  xlab('Country Affiliation') +
   ylab('Total Papers') +
   coord_flip() +
-  theme_minimal()
+  theme_minimal() +
+  theme(text = element_text(family = "Palatino"))
 
 ggsave("CountryCounts.png", p, width = 8, height = 6, units = "in", dpi=150)
 
