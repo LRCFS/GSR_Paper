@@ -119,7 +119,7 @@ p <- ggplot(cntry.dat, aes(x=Country, y=Count, fill=Continent)) +
   theme_minimal() +
   theme(text = element_text(family = "Palatino"))
 
-ggsave("CountryCounts.png", p, width = 8, height = 6, units = "in", dpi=150)
+ggsave("Fig2_CountryCounts.png", p, width = 8, height = 6, units = "in", dpi=150)
 
 
 # Select column label $Year, $Title,  $Source.title, $Author.Keywords, $Index.Keyword
@@ -251,7 +251,7 @@ p <- ggplot(GraphTemp1,aes(x=Year,y=reorder(KeywordsCorrected,graphorder),fill=c
         plot.margin=margin(0.7,0.4,0.1,0.2,"cm"),
         plot.title=element_text(colour=textcol,hjust=0,size=12))
 
-ggsave("KeywordTrend.png", p, width = 6, height = 8, units = "in", dpi=150)
+ggsave("Fig5_KeywordTrend.png", p, width = 6, height = 8, units = "in", dpi=150)
 
 #############################################################
 #####                     Authors                       #####
@@ -339,4 +339,4 @@ YearTableOutput$Ratio <- round(YearOutput$Author/YearOutput$Publications, 1)
 YearTableOutput$`New Author Percentage` <- round(YearOutput$`New Authors`/YearOutput$Author*100, 1)
 
 #Export to text file for Latex import
-write.table(YearTableOutput, file = "YearTableOutput.txt", sep = " & ", row.names = F)
+write.table(YearTableOutput, file = "Table1_full.txt", sep = " & ", row.names = F)
