@@ -53,9 +53,6 @@ CitationDataCountScopus <- aggregate(CountPublicationsScopus$Reference, list(Cou
 names(CitationDataCountScopus) <- c("Reference","Scopus")
 
 TopCitation <- merge(CitationDataCount, CitationDataCountScopus, by="Reference", all = T)
-# CC - are you sure you want to do this? Adds a series of zeros to the 
-#      data and potentially scews the numbers down. 'NA's are normally 
-#      dealt with sensibly.
 TopCitation$Scopus[is.na(TopCitation$Scopus)] <- 0
 
 # Add the subject Area to the publication 
@@ -92,7 +89,6 @@ TopCitationSubjectArea$Percentage <- round(TopCitationSubjectArea$Scopus/TopCita
 #####                      GRAPH                        #####
 #############################################################
 
-# CC - I don't follow what is going on here? What's the purpose?
 temp3 <- subset(TopCitationSubjectArea, Citation > min.citations)
 temp1 <- data.frame(table(temp3$SubjectArea))
 names(temp1) <- c("SubjectArea", "Freq");temp1
@@ -104,16 +100,12 @@ sum(temp1$Freq)
 ReduceTopCitationSujectArea <-subset(temp3, SubjectArea %in% SubjA);ReduceTopCitationSujectArea
 ReduceTopCitationSujectArea$SubjectArea <- str_wrap(ReduceTopCitationSujectArea$SubjectArea,16)
 
-# CC - I don't really understand what you're trying to show here?
 dotplot_1 = ggplot(ReduceTopCitationSujectArea, aes(x=SubjectArea, y=Percentage)) + 
-  # CC - I've moved the boxplot to before the dotplot so the dots are
-  #      plotted on top of the boxplot rather than be obscured by it
   geom_boxplot() + xlab("Subject Area") + ylab("Percentage /%") +
   geom_dotplot(aes(fill=SubjectArea), binaxis="y", show.legend = F,
                stackdir="center", binwidth=1.5) +
-  # CC - stat_summary() unnecessary here as the median is already on the boxplot
-  #stat_summary(fun.y=median, fun.ymin=median, fun.ymax=median, geom="crossbar", width=0.0) +
-  theme(axis.text.x = element_text(angle=0, vjust=0.6))
+  theme(text = element_text(family = "Palatino"),
+        axis.text.x = element_text(angle=0, vjust=0.6))
   
 ggsave("Fig4_SubjectBoxplot.png",dotplot_1, width = 9, height = 6, units = "in", dpi=150)
 

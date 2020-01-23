@@ -237,7 +237,8 @@ p <- ggplot(GraphTemp1,aes(x=Year,y=reorder(KeywordsCorrected,graphorder),fill=c
   scale_fill_manual(values=c("#d53e4f","#f46d43","#fdae61","#fee08b","#d5ee52","#77c86c","#66afc6","#ddf1da"),na.value = "grey90")+
   #coord_fixed()+
   theme_grey(base_size=8)+
-  theme(legend.position="right",legend.direction="vertical",
+  theme(text = element_text(family = "Palatino"),
+        legend.position="right",legend.direction="vertical",
         legend.title=element_text(colour=textcol),
         legend.margin=margin(grid::unit(0,"cm")),
         legend.text=element_text(colour=textcol,size=7),
