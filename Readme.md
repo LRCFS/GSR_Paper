@@ -28,12 +28,12 @@ To generate the keyword trending plot and Gephi input files run:
 
     Rscript ScopusSearch.R
 
-This creates the `CountryCounts.png`, `KeywordTrend.png` plots and the `GephiAuthor.csv`, 
-`GephiListAuthorLastYear.csv` files.
+This creates the `Fig2_CountryCounts.png`, `Fig5_KeywordTrend.png` plots and the `GephiAuthor.csv`, 
+`GephiListAuthorLastYear.csv` and `Table1_full.txt` files.
     
 To generate the subject area boxplot run:
 
     Rscript CitationCode.R
 
-This creates a `SubjectBoxplot.png` file.
+This creates a `Fig4_SubjectBoxplot.png` file.
 
