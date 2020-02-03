@@ -1,0 +1,5 @@
+install.packages("tidyverse")
+install.packages("ggplot2")
+install.packages("maps")
+install.packages("countrycodes")
+install.packages("RColorBrewer")

@@ -3,6 +3,8 @@
 A scientometric approach using gunshot residue (GSR) literature as an example
 =============================================================================
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/LRCFS/GSR_Paper/master?urlpath=%2Frstudio)
+
 This repository contains the R scripts used to process literature 
 searches performed Scopus and supports the results found in the
 paper:
