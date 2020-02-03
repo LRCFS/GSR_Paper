@@ -20,7 +20,7 @@ libraries:
     tidyverse
     ggplot2
     maps
-    countrycodes
+    countrycode
     RColorBrewer
 
 Quickstart
