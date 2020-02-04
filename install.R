@@ -1,6 +1,6 @@
 install.packages("dplyr")
 install.packages("stringr")
-install.packages("tidyr")
+#install.packages("tidyr")
 install.packages("ggplot2")
 install.packages("maps")
 install.packages("countrycode")
