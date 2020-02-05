@@ -39,3 +39,8 @@ To generate the subject area boxplot run:
 
 This creates a `Fig4_SubjectBoxplot.png` file.
 
+**MyBinder**
+
+Alternatively, click the "launch binder" button at the top of the this readme to open
+an interactive RStudio session hosted by [mybinder.org](https://mybinder.org/).
+
