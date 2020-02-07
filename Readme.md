@@ -3,12 +3,6 @@
 A scientometric approach using gunshot residue (GSR) literature as an example
 =============================================================================
 
-Launch RStudio: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/LRCFS/GSR_Paper/master?urlpath=%2Frstudio)
-
-Launch ScopusSearch Script: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/drchriscole/GSR_Paper/master?filepath=ScopusSearch.R)
-
-Launch CitationCode Script: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/drchriscole/GSR_Paper/master?filepath=CitationCode.R)
-
 This repository contains the R scripts used to process literature 
 searches performed Scopus and supports the results found in the
 paper:
@@ -45,6 +39,11 @@ This creates a `Fig4_SubjectBoxplot.png` file.
 
 **MyBinder**
 
-Alternatively, click one of the "launch binder" buttons at the top of the this readme to either open
-an interactive RStudio session hosted by [mybinder.org](https://mybinder.org/) or interative notebooks of the two main scripts.
+|  |  |
+|---------------|-------------|
+| Launch RStudio: | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/LRCFS/GSR_Paper/master?urlpath=%2Frstudio) |
+| Launch ScopusSearch Script: | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/drchriscole/GSR_Paper/master?filepath=ScopusSearch.R) |
+| Launch CitationCode Script: | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/drchriscole/GSR_Paper/master?filepath=CitationCode.R) |
+
+Alternatively, click one of the "launch binder" buttons above to either open an interactive RStudio session hosted by [mybinder.org](https://mybinder.org/) or interactive notebooks of the two main R scripts.
 
